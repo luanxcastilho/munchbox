@@ -1,0 +1,31 @@
+services:
+  munchbox_db:
+    image: postgres:latest
+    container_name: munchbox_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: munchbox
+      POSTGRES_PASSWORD: munchbox
+      POSTGRES_DB: munchbox_db
+    volumes:
+      - munchbox_db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  munchbox_app:
+    image: openjdk:21-jdk
+    container_name: munchbox_app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target:/app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://munchbox_db:5432/munchbox_db
+      - SPRING_DATASOURCE_USERNAME=munchbox
+      - SPRING_DATASOURCE_PASSWORD=munchbox
+    depends_on:
+      - munchbox_db
+    command: ["java", "-jar", "/app/munchbox.jar"]
+
+volumes:
+  munchbox_db_data:
