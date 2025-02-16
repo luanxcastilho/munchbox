@@ -1,8 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.usuario.UsuarioRequestDTO;
 import br.com.fiap.munchbox.dtos.usuarioperfil.UsuarioPerfilRequestDTO;
-import br.com.fiap.munchbox.entities.UsuarioPerfil;
 import br.com.fiap.munchbox.entities.UsuarioPerfil;
 import br.com.fiap.munchbox.repositories.UsuarioPerfilRepository;
 import org.springframework.data.domain.PageRequest;
