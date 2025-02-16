@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/cliente-enderecos")
+@RequestMapping("/v1/clientes-enderecos")
 @Tag(
         name = "Endereços de clientes",
         description = "Gerenciamento de endereços de clientes"
@@ -37,7 +37,7 @@ public class ClienteEnderecoController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "15") int size
     ) {
-        logger.info("GET /v1/cliente-enderecos PAGE: "+page+" SIZE: "+size);
+        logger.info("GET /v1/clientes-enderecos PAGE: "+page+" SIZE: "+size);
         var clienteEndereco = clienteEnderecoService.findAll(page, size);
         return ResponseEntity.ok(clienteEndereco);
     }
@@ -49,7 +49,7 @@ public class ClienteEnderecoController {
     public ResponseEntity<Optional<ClienteEndereco>> findById(
             @PathVariable("id") Long id
     ){
-        logger.info("GET /v1/cliente-enderecos/"+id);
+        logger.info("GET /v1/clientes-enderecos/"+id);
         var clienteEndereco = this.clienteEnderecoService.findById(id);
         return ResponseEntity.ok(clienteEndereco);
     }
@@ -61,7 +61,7 @@ public class ClienteEnderecoController {
     public ResponseEntity<ClienteEndereco> create(
             @RequestBody ClienteEnderecoRequestDTO clienteEndereco
     ){
-        logger.info("POST /v1/cliente-enderecos BODY: "+clienteEndereco);
+        logger.info("POST /v1/clientes-enderecos BODY: "+clienteEndereco);
         this.clienteEnderecoService.create(clienteEndereco);
         return ResponseEntity.status(201).build();
     }
@@ -74,7 +74,7 @@ public class ClienteEnderecoController {
             @PathVariable("id") Long id,
             @RequestBody ClienteEnderecoRequestDTO clienteEndereco
     ){
-        logger.info("PUT /v1/cliente-enderecos/"+id+" BODY: "+clienteEndereco);
+        logger.info("PUT /v1/clientes-enderecos/"+id+" BODY: "+clienteEndereco);
         this.clienteEnderecoService.update(clienteEndereco, id);
         return ResponseEntity.ok().build();
     }
@@ -86,7 +86,7 @@ public class ClienteEnderecoController {
     public ResponseEntity<Void> delete(
             @PathVariable("id") Long id
     ){
-        logger.info("DELETE /v1/cliente-enderecos/"+id);
+        logger.info("DELETE /v1/clientes-enderecos/"+id);
         this.clienteEnderecoService.delete(id);
         return ResponseEntity.ok().build();
     }

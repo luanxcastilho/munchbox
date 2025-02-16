@@ -15,5 +15,7 @@ public class UsuarioRequestDTO {
 
     @NotBlank(message = "A senha é obrigatória")
     private String senha;
-    
+
+    @NotBlank(message = "O perfil do usuário é obrigatório")
+    private Long idUsuarioPerfil;
 }

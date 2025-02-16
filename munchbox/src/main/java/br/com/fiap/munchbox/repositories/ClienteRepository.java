@@ -1,20 +1,10 @@
 package br.com.fiap.munchbox.repositories;
 
-import br.com.fiap.munchbox.dtos.cliente.ClienteRequestDTO;
 import br.com.fiap.munchbox.entities.Cliente;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+@Repository
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-public interface ClienteRepository {
-
-    Optional<Cliente> findById(Long id);
-
-    List<Cliente> findAll(int size, int offset);
-
-    Integer create(ClienteRequestDTO cliente);
-
-    Integer update(ClienteRequestDTO cliente, Long id);
-
-    Integer delete(Long id);
 }

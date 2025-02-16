@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/proprietario-enderecos")
+@RequestMapping("/v1/proprietarios-enderecos")
 @Tag(
         name = "Endereços de proprietários",
         description = "Gerenciamento de endereços de proprietários"
@@ -37,7 +37,7 @@ public class ProprietarioEnderecoController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "15") int size
     ) {
-        logger.info("GET /v1/proprietario-enderecos PAGE: "+page+" SIZE: "+size);
+        logger.info("GET /v1/proprietarios-enderecos PAGE: "+page+" SIZE: "+size);
         var proprietarioEndereco = proprietarioEnderecoService.findAll(page, size);
         return ResponseEntity.ok(proprietarioEndereco);
     }
@@ -49,7 +49,7 @@ public class ProprietarioEnderecoController {
     public ResponseEntity<Optional<ProprietarioEndereco>> findById(
             @PathVariable("id") Long id
     ){
-        logger.info("GET /v1/proprietario-enderecos/"+id);
+        logger.info("GET /v1/proprietarios-enderecos/"+id);
         var proprietarioEndereco = this.proprietarioEnderecoService.findById(id);
         return ResponseEntity.ok(proprietarioEndereco);
     }
@@ -61,7 +61,7 @@ public class ProprietarioEnderecoController {
     public ResponseEntity<ProprietarioEndereco> create(
             @RequestBody ProprietarioEnderecoRequestDTO proprietarioEndereco
     ){
-        logger.info("POST /v1/proprietario-enderecos BODY: "+proprietarioEndereco);
+        logger.info("POST /v1/proprietarios-enderecos BODY: "+proprietarioEndereco);
         this.proprietarioEnderecoService.create(proprietarioEndereco);
         return ResponseEntity.status(201).build();
     }
@@ -74,7 +74,7 @@ public class ProprietarioEnderecoController {
             @PathVariable("id") Long id,
             @RequestBody ProprietarioEnderecoRequestDTO proprietarioEndereco
     ){
-        logger.info("PUT /v1/proprietario-enderecos/"+id+" BODY: "+proprietarioEndereco);
+        logger.info("PUT /v1/proprietarios-enderecos/"+id+" BODY: "+proprietarioEndereco);
         this.proprietarioEnderecoService.update(proprietarioEndereco, id);
         return ResponseEntity.ok().build();
     }
@@ -86,7 +86,7 @@ public class ProprietarioEnderecoController {
     public ResponseEntity<Void> delete(
             @PathVariable("id") Long id
     ){
-        logger.info("DELETE /v1/proprietario-enderecos/"+id);
+        logger.info("DELETE /v1/proprietarios-enderecos/"+id);
         this.proprietarioEnderecoService.delete(id);
         return ResponseEntity.ok().build();
     }

@@ -1,6 +1,5 @@
 package br.com.fiap.munchbox.controllers;
 
-import br.com.fiap.munchbox.dtos.usuario.AlterarSenhaResquestDTO;
 import br.com.fiap.munchbox.dtos.usuario.UsuarioRequestDTO;
 import br.com.fiap.munchbox.entities.Usuario;
 import br.com.fiap.munchbox.services.UsuarioService;
@@ -20,13 +19,15 @@ import java.util.Optional;
         name = "Usuários",
         description = "Gerenciamento de usuários"
 )
-public class UsuarioController {
+public class UsuarioController
+{
 
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
     private final UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService)
+    {
         this.usuarioService = usuarioService;
     }
 
@@ -37,9 +38,13 @@ public class UsuarioController {
     public ResponseEntity<List<Usuario>> findAll(
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "15") int size
-    ) {
-        logger.info("GET /v1/usuarios PAGE: "+page+" SIZE: "+size);
-        var usuario = usuarioService.findAll(page, size);
+    )
+    {
+        logger.info("GET /v1/usuarios PAGE: " + page + " SIZE: " + size);
+        var usuario = usuarioService.findAll(
+                page,
+                size
+        );
         return ResponseEntity.ok(usuario);
     }
 
@@ -49,10 +54,11 @@ public class UsuarioController {
     )
     public ResponseEntity<Optional<Usuario>> findById(
             @PathVariable("id") Long id
-    ){
-        logger.info("GET /v1/usuarios/"+id);
+    )
+    {
+        logger.info("GET /v1/usuarios/" + id);
         var usuario = this.usuarioService.findById(id);
-        logger.info("    "+usuario.toString());
+        logger.info("    " + usuario.toString());
         return ResponseEntity.ok(usuario);
     }
 
@@ -62,37 +68,30 @@ public class UsuarioController {
     )
     public ResponseEntity<Usuario> create(
             @RequestBody UsuarioRequestDTO usuario
-    ){
-        logger.info("POST /v1/usuarios BODY: "+usuario);
+    )
+    {
+        logger.info("POST /v1/usuarios BODY: " + usuario);
         this.usuarioService.create(usuario);
         return ResponseEntity.status(201).build();
     }
 
-//    @PutMapping("/{id}")
-//    @Operation(
-//            summary = "Atualiza um usuário pelo ID do usuário"
-//    )
-//    public ResponseEntity<Usuario> update(
-//            @PathVariable("id") Long id,
-//            @RequestBody UsuarioRequestDTO usuario
-//    ){
-//        logger.info("PUT /v1/usuarios/"+id+" BODY: "+usuario);
-//        this.usuarioService.update(usuario, id);
-//        return ResponseEntity.ok().build();
-//    }
-
-    @PutMapping("/{id}/alterar-senha")
+    @PutMapping("/{id}")
     @Operation(
-            summary = "Atualiza a senha de um usuário pelo ID do usuário"
+            summary = "Atualiza um usuário pelo ID do usuário"
     )
-    public ResponseEntity<Usuario> alterarSenha(
+    public ResponseEntity<Usuario> update(
             @PathVariable("id") Long id,
-            @RequestBody AlterarSenhaResquestDTO usuario
-    ){
-        logger.info("PUT /v1/usuarios/"+id+"/alterar-senha BODY: "+usuario);
-        this.usuarioService.alterarSenha(usuario, id);
+            @RequestBody UsuarioRequestDTO usuario
+    )
+    {
+        logger.info("PUT /v1/usuarios/" + id + " BODY: " + usuario);
+        this.usuarioService.update(
+                usuario,
+                id
+        );
         return ResponseEntity.ok().build();
     }
+
 
     @DeleteMapping("/{id}")
     @Operation(
@@ -100,8 +99,9 @@ public class UsuarioController {
     )
     public ResponseEntity<Void> delete(
             @PathVariable("id") Long id
-    ){
-        logger.info("DELETE /v1/usuarios/"+id);
+    )
+    {
+        logger.info("DELETE /v1/usuarios/" + id);
         this.usuarioService.delete(id);
         return ResponseEntity.ok().build();
     }

@@ -60,10 +60,10 @@ public class ClienteController {
             summary = "Cadastra um novo cliente"
     )
     public ResponseEntity<Cliente> create(
-            @Valid @RequestBody ClienteRequestDTO cliente
+            @Valid @RequestBody ClienteRequestDTO clienteRequestDTO
     ){
-        logger.info("POST /v1/clientes BODY: "+cliente);
-        this.clienteService.create(cliente);
+        logger.info("POST /v1/clientes BODY: "+clienteRequestDTO);
+        this.clienteService.create(clienteRequestDTO);
         return ResponseEntity.status(201).build();
     }
 
@@ -73,10 +73,10 @@ public class ClienteController {
     )
     public ResponseEntity<Cliente> update(
             @PathVariable("id") Long id,
-            @Valid @RequestBody ClienteRequestDTO cliente
+            @Valid @RequestBody ClienteRequestDTO clienteRequestDTO
     ){
-        logger.info("PUT /v1/clientes/"+id+" BODY: "+cliente);
-        this.clienteService.update(cliente, id);
+        logger.info("PUT /v1/clientes/"+id+" BODY: "+clienteRequestDTO);
+        this.clienteService.update(clienteRequestDTO, id);
         return ResponseEntity.ok().build();
     }
 
