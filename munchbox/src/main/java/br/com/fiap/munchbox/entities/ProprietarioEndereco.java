@@ -1,9 +1,6 @@
 package br.com.fiap.munchbox.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.io.Serial;
@@ -36,7 +33,7 @@ public class ProprietarioEndereco implements Serializable {
     @Column(name = "numero", length = 10, nullable = false)
     private String numero;
 
-    @Column(name = "complemento", length = 50, nullable = true)
+    @Column(name = "complemento", length = 50)
     private String complemento;
 
     @Column(name = "bairro", length = 50, nullable = false)
