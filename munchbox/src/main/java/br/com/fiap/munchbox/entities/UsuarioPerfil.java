@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "usuario_perfil")
-public class UsuarioPerfil
+public class UsuarioPerfil implements Serializable
 {
     @Serial
     private static final long serialVersionUID = 1L;
