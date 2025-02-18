@@ -2,8 +2,7 @@ package br.com.fiap.munchbox.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +14,9 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "usuario_perfil")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioPerfil implements Serializable
 {
     @Serial
@@ -38,11 +40,6 @@ public class UsuarioPerfil implements Serializable
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "usuarioPerfil", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Usuario> usuario = new HashSet<>();
-
-    public UsuarioPerfil()
-    {
-
-    }
 
     public UsuarioPerfil(String nome, LocalDateTime dataAtualizacao, LocalDateTime dataInclusao)
     {

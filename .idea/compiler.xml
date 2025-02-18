@@ -10,6 +10,9 @@
         <module name="munchbox" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="munchbox (1)" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
