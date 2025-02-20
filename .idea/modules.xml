@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/munchbox.iml" filepath="$PROJECT_DIR$/.idea/munchbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/munchbox/munchbox.iml" filepath="$PROJECT_DIR$/munchbox/munchbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/munchbox (1).iml" filepath="$PROJECT_DIR$/munchbox (1).iml" />
     </modules>
   </component>
 </project>
