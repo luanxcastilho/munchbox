@@ -4,7 +4,6 @@ import br.com.fiap.munchbox.dtos.usuarioperfil.UsuarioPerfilRequestDTO;
 import br.com.fiap.munchbox.entities.UsuarioPerfil;
 import br.com.fiap.munchbox.helpers.UsuarioPerfilHelper;
 import br.com.fiap.munchbox.repositories.UsuarioPerfilRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -23,8 +22,6 @@ import static org.mockito.Mockito.*;
 
 public class UsuarioPerfilServiceTest
 {
-    AutoCloseable mock;
-
     @Mock
     private UsuarioPerfilRepository usuarioPerfilRepository;
 
@@ -37,18 +34,12 @@ public class UsuarioPerfilServiceTest
     @BeforeEach
     void setUp()
     {
-        mock = MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.openMocks(this);
 
         usuarioPerfil = UsuarioPerfilHelper.gerarUsuarioPerfil();
 
         usuarioPerfilRequestDTO = new UsuarioPerfilRequestDTO();
         usuarioPerfilRequestDTO.setNome(usuarioPerfil.getNome());
-    }
-
-    @AfterEach
-    void tearDown() throws Exception
-    {
-        mock.close();
     }
 
     @Test
@@ -57,7 +48,7 @@ public class UsuarioPerfilServiceTest
         Page<UsuarioPerfil> page = new PageImpl<>(List.of(usuarioPerfil));
         when(usuarioPerfilRepository.findAll(any(PageRequest.class))).thenReturn(page);
 
-        List<UsuarioPerfil> resultado = usuarioPerfilService.findAll(1,15);
+        List<UsuarioPerfil> resultado = usuarioPerfilService.findAll(1, 15);
 
         assertFalse(resultado.isEmpty());
         assertEquals(1, resultado.size());
@@ -112,13 +103,11 @@ public class UsuarioPerfilServiceTest
     }
 
     @Test
-    void deveLancarExcecao_QuandoAtualizarPerfilNaoExistente()
+    void deveLancarExcecao_QuandoReceberUsuarioPerfilInexistente()
     {
         when(usuarioPerfilRepository.findById(1L)).thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            usuarioPerfilService.update(usuarioPerfilRequestDTO, 1L);
-        });
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> usuarioPerfilService.update(usuarioPerfilRequestDTO, 1L));
 
         assertEquals("Perfil de usuário não encontrado", exception.getMessage());
         verify(usuarioPerfilRepository, times(1)).findById(1L);

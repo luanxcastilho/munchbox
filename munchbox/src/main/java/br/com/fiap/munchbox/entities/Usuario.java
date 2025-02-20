@@ -1,8 +1,7 @@
 package br.com.fiap.munchbox.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +11,9 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "usuario")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario implements Serializable
 {
 
@@ -39,11 +41,6 @@ public class Usuario implements Serializable
     @JoinColumn(name = "id_usuario_perfil")
     private UsuarioPerfil usuarioPerfil;
 
-    public Usuario()
-    {
-
-    }
-
     public Usuario(String login, String senha, LocalDateTime dataAtualizacao, LocalDateTime dataInclusao, UsuarioPerfil usuarioPerfil)
     {
         this.login = login;
@@ -52,4 +49,5 @@ public class Usuario implements Serializable
         this.dataInclusao = dataInclusao;
         this.usuarioPerfil = usuarioPerfil;
     }
+
 }
