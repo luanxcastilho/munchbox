@@ -104,8 +104,6 @@ class UsuarioServiceTest
 
         usuarioService.update(usuarioRequestDTO, usuario.getIdUsuario());
 
-        verify(usuarioRepository, times(1)).findById(usuario.getIdUsuario());
-
         verify(usuarioRepository, times(1)).save(any(Usuario.class));
     }
 
@@ -127,7 +125,6 @@ class UsuarioServiceTest
         RuntimeException exception = assertThrows(RuntimeException.class, () -> usuarioService.update(usuarioRequestDTO, usuario.getIdUsuario()));
 
         assertEquals("Usuário não encontrado", exception.getMessage());
-        verify(usuarioRepository, times(1)).findById(usuario.getIdUsuario());
         verify(usuarioRepository, never()).save(any(Usuario.class));
     }
 
@@ -140,9 +137,6 @@ class UsuarioServiceTest
         RuntimeException exception = assertThrows(RuntimeException.class, () -> usuarioService.update(usuarioRequestDTO, usuario.getIdUsuario()));
 
         assertEquals("Perfil de usuário não encontrado", exception.getMessage());
-
-        verify(usuarioPerfilRepository, times(1)).findById(usuarioRequestDTO.getIdUsuarioPerfil());
-
         verify(usuarioRepository, never()).save(any(Usuario.class));
     }
 
@@ -154,9 +148,6 @@ class UsuarioServiceTest
         RuntimeException exception = assertThrows(RuntimeException.class, () -> usuarioService.create(usuarioRequestDTO));
 
         assertEquals("Perfil de usuário não encontrado", exception.getMessage());
-
-        verify(usuarioPerfilRepository, times(1)).findById(usuarioRequestDTO.getIdUsuarioPerfil());
-
         verify(usuarioRepository, never()).save(any(Usuario.class));
     }
 

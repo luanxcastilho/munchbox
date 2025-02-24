@@ -4,19 +4,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "proprietario")
-public class Proprietario implements Serializable {
+public class Proprietario implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,11 +52,14 @@ public class Proprietario implements Serializable {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    public Proprietario(){
+    public Proprietario()
+    {
 
     }
 
-    public Proprietario(String nome, String email, String celular, LocalDate dataNascimento, LocalDateTime dataAtualizacao, LocalDateTime dataInclusao) {
+    public Proprietario(Usuario usuario, String nome, String email, String celular, LocalDate dataNascimento, LocalDateTime dataAtualizacao, LocalDateTime dataInclusao)
+    {
+        this.usuario = usuario;
         this.nome = nome;
         this.email = email;
         this.celular = celular;

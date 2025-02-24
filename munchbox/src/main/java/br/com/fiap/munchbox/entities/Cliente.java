@@ -16,6 +16,7 @@ import java.util.*;
 @NoArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 
