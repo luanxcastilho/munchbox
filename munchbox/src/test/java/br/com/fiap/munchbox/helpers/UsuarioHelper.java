@@ -1,7 +1,6 @@
 package br.com.fiap.munchbox.helpers;
 
 import br.com.fiap.munchbox.entities.Usuario;
-import br.com.fiap.munchbox.entities.UsuarioPerfil;
 
 import java.time.LocalDateTime;
 

@@ -39,15 +39,15 @@ public class ClienteEnderecoService
 
     public void create(ClienteEnderecoRequestDTO clienteEnderecoRequestDTO)
     {
-        Cliente cliente = this.clienteRepository.findById(clienteEnderecoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        Cliente cliente = this.clienteRepository.findById(clienteEnderecoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         ClienteEndereco clienteEndereco = new ClienteEndereco(clienteEnderecoRequestDTO.getRua(), clienteEnderecoRequestDTO.getNumero(), clienteEnderecoRequestDTO.getComplemento(), clienteEnderecoRequestDTO.getBairro(), clienteEnderecoRequestDTO.getCidade(), clienteEnderecoRequestDTO.getEstado(), clienteEnderecoRequestDTO.getCep(), LocalDateTime.now(), LocalDateTime.now(), cliente);
         this.clienteEnderecoRepository.save(clienteEndereco);
     }
 
     public void update(ClienteEnderecoRequestDTO clienteEnderecoRequestDTO, Long id)
     {
-        ClienteEndereco clienteEndereco = this.clienteEnderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço do cliente não encontrado!"));
-        Cliente cliente = this.clienteRepository.findById(clienteEnderecoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        ClienteEndereco clienteEndereco = this.clienteEnderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço do cliente não encontrado"));
+        Cliente cliente = this.clienteRepository.findById(clienteEnderecoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
         clienteEndereco.setRua(clienteEnderecoRequestDTO.getRua());
         clienteEndereco.setNumero(clienteEnderecoRequestDTO.getNumero());

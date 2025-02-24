@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "cliente_endereco")
 public class ClienteEndereco implements Serializable {
 
@@ -24,8 +25,6 @@ public class ClienteEndereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente_endereco", unique = true, nullable = false)
     private Long idClienteEndereco;
-
-    //private Long idCliente;
 
     @Column(name = "rua", length = 100, nullable = false)
     private String rua;

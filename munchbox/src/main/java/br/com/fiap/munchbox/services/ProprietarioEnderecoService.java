@@ -43,7 +43,7 @@ public class ProprietarioEnderecoService
 
     public void create(ProprietarioEnderecoRequestDTO proprietarioEnderecoRequestDTO)
     {
-        Proprietario proprietario = this.proprietarioRepository.findById(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietário não encontrado!"));
+        Proprietario proprietario = this.proprietarioRepository.findById(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietário não encontrado"));
         ProprietarioEndereco proprietarioEndereco = new ProprietarioEndereco
                 (
                         proprietarioEnderecoRequestDTO.getRua(),
@@ -62,8 +62,8 @@ public class ProprietarioEnderecoService
 
     public void update(ProprietarioEnderecoRequestDTO proprietarioEnderecoRequestDTO, Long id)
     {
-        ProprietarioEndereco proprietarioEndereco = this.proprietarioEnderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço do proprietário não encontrado!"));
-        Proprietario proprietario = this.proprietarioRepository.findById(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietário não encontrado!"));
+        ProprietarioEndereco proprietarioEndereco = this.proprietarioEnderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço do proprietário não encontrado"));
+        Proprietario proprietario = this.proprietarioRepository.findById(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietário não encontrado"));
 
         proprietarioEndereco.setRua(proprietarioEnderecoRequestDTO.getRua());
         proprietarioEndereco.setNumero(proprietarioEnderecoRequestDTO.getNumero());

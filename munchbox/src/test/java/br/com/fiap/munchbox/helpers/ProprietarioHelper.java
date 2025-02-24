@@ -5,7 +5,7 @@ import br.com.fiap.munchbox.entities.Proprietario;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class ProprietarioHelper
+public abstract class ProprietarioHelper
 {
     public static Proprietario gerarProprietario()
     {

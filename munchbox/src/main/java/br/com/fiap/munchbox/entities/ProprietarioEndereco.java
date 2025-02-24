@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "proprietario_endereco")
 public class ProprietarioEndereco implements Serializable {
 

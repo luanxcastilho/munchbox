@@ -5,7 +5,7 @@ import br.com.fiap.munchbox.entities.Cliente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class ClienteHelper
+public abstract class ClienteHelper
 {
     public static Cliente gerarCliente()
     {
