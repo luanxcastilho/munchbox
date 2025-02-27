@@ -6,16 +6,9 @@ import java.time.LocalDateTime;
 
 public abstract class UsuarioPerfilHelper
 {
+
     public static UsuarioPerfil gerarUsuarioPerfil()
     {
-        return UsuarioPerfil
-                .builder()
-                .idUsuarioPerfil(1L)
-                .nome("Mockito")
-                .dataAtualizacao(LocalDateTime.now())
-                .dataInclusao(LocalDateTime.now())
-                .build();
+        return UsuarioPerfil.builder().idUsuarioPerfil(1L).nome("Mockito").dataAtualizacao(LocalDateTime.of(1993, 2, 21, 0, 0)).dataInclusao(LocalDateTime.of(1993, 2, 21, 0, 0)).build();
     }
-
-
 }
