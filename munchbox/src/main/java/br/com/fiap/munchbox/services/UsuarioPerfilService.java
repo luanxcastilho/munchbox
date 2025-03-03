@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.usuarioperfil.UsuarioPerfilRequestDTO;
+import br.com.fiap.munchbox.dtos.UsuarioPerfilRequestDTO;
 import br.com.fiap.munchbox.entities.UsuarioPerfil;
 import br.com.fiap.munchbox.repositories.UsuarioPerfilRepository;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +36,7 @@ public class UsuarioPerfilService
     {
         UsuarioPerfil usuarioPerfil = new UsuarioPerfil
                 (
-                        usuarioPerfilRequestDTO.getNome(),
+                        usuarioPerfilRequestDTO.getNome().toUpperCase(),
                         LocalDateTime.now(),
                         LocalDateTime.now()
                 );
@@ -47,7 +47,7 @@ public class UsuarioPerfilService
     {
         UsuarioPerfil usuarioPerfil = this.usuarioPerfilRepository.findById(id).orElseThrow(() -> new RuntimeException("Perfil de usuário não encontrado"));
 
-        usuarioPerfil.setNome(usuarioPerfilRequestDTO.getNome());
+        usuarioPerfil.setNome(usuarioPerfilRequestDTO.getNome().toUpperCase());
         usuarioPerfil.setDataAtualizacao(LocalDateTime.now());
 
         this.usuarioPerfilRepository.save(usuarioPerfil);

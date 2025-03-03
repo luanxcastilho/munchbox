@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.controllers;
 
-import br.com.fiap.munchbox.dtos.usuario.UsuarioRequestDTO;
+import br.com.fiap.munchbox.dtos.UsuarioRequestDTO;
 import br.com.fiap.munchbox.entities.Usuario;
 import br.com.fiap.munchbox.services.AutenticacaoService;
 import io.swagger.v3.oas.annotations.Operation;

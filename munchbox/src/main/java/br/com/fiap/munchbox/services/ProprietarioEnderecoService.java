@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.proprietarioendereco.ProprietarioEnderecoRequestDTO;
+import br.com.fiap.munchbox.dtos.ProprietarioEnderecoRequestDTO;
 import br.com.fiap.munchbox.entities.Proprietario;
 import br.com.fiap.munchbox.entities.ProprietarioEndereco;
 import br.com.fiap.munchbox.repositories.ProprietarioEnderecoRepository;
@@ -46,12 +46,12 @@ public class ProprietarioEnderecoService
         Proprietario proprietario = this.proprietarioRepository.findById(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietário não encontrado"));
         ProprietarioEndereco proprietarioEndereco = new ProprietarioEndereco
                 (
-                        proprietarioEnderecoRequestDTO.getRua(),
-                        proprietarioEnderecoRequestDTO.getNumero(),
-                        proprietarioEnderecoRequestDTO.getComplemento(),
-                        proprietarioEnderecoRequestDTO.getBairro(),
-                        proprietarioEnderecoRequestDTO.getCidade(),
-                        proprietarioEnderecoRequestDTO.getEstado(),
+                        proprietarioEnderecoRequestDTO.getRua().toUpperCase(),
+                        proprietarioEnderecoRequestDTO.getNumero().toUpperCase(),
+                        proprietarioEnderecoRequestDTO.getComplemento().toUpperCase(),
+                        proprietarioEnderecoRequestDTO.getBairro().toUpperCase(),
+                        proprietarioEnderecoRequestDTO.getCidade().toUpperCase(),
+                        proprietarioEnderecoRequestDTO.getEstado().toUpperCase(),
                         proprietarioEnderecoRequestDTO.getCep(),
                         LocalDateTime.now(),
                         LocalDateTime.now(),
@@ -65,12 +65,12 @@ public class ProprietarioEnderecoService
         ProprietarioEndereco proprietarioEndereco = this.proprietarioEnderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço do proprietário não encontrado"));
         Proprietario proprietario = this.proprietarioRepository.findById(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietário não encontrado"));
 
-        proprietarioEndereco.setRua(proprietarioEnderecoRequestDTO.getRua());
-        proprietarioEndereco.setNumero(proprietarioEnderecoRequestDTO.getNumero());
-        proprietarioEndereco.setComplemento(proprietarioEnderecoRequestDTO.getComplemento());
-        proprietarioEndereco.setBairro(proprietarioEnderecoRequestDTO.getBairro());
-        proprietarioEndereco.setCidade(proprietarioEnderecoRequestDTO.getCidade());
-        proprietarioEndereco.setEstado(proprietarioEnderecoRequestDTO.getEstado());
+        proprietarioEndereco.setRua(proprietarioEnderecoRequestDTO.getRua().toUpperCase());
+        proprietarioEndereco.setNumero(proprietarioEnderecoRequestDTO.getNumero().toUpperCase());
+        proprietarioEndereco.setComplemento(proprietarioEnderecoRequestDTO.getComplemento().toUpperCase());
+        proprietarioEndereco.setBairro(proprietarioEnderecoRequestDTO.getBairro().toUpperCase());
+        proprietarioEndereco.setCidade(proprietarioEnderecoRequestDTO.getCidade().toUpperCase());
+        proprietarioEndereco.setEstado(proprietarioEnderecoRequestDTO.getEstado().toUpperCase());
         proprietarioEndereco.setCep(proprietarioEnderecoRequestDTO.getCep());
         proprietarioEndereco.setDataAtualizacao(LocalDateTime.now());
         proprietarioEndereco.setProprietario(proprietario);

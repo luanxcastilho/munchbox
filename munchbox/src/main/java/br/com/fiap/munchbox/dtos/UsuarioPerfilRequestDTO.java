@@ -1,4 +1,4 @@
-package br.com.fiap.munchbox.dtos.usuarioperfil;
+package br.com.fiap.munchbox.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

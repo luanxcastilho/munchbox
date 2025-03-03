@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.cliente.ClienteRequestDTO;
+import br.com.fiap.munchbox.dtos.ClienteRequestDTO;
 import br.com.fiap.munchbox.entities.Cliente;
 import br.com.fiap.munchbox.entities.Usuario;
 import br.com.fiap.munchbox.helpers.ClienteHelper;

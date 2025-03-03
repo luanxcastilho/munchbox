@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.clienteendereco.ClienteEnderecoRequestDTO;
+import br.com.fiap.munchbox.dtos.ClienteEnderecoRequestDTO;
 import br.com.fiap.munchbox.entities.Cliente;
 import br.com.fiap.munchbox.entities.ClienteEndereco;
 import br.com.fiap.munchbox.helpers.ClienteEnderecoHelper;

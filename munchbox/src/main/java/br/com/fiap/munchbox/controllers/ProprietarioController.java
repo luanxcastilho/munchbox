@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.controllers;
 
-import br.com.fiap.munchbox.dtos.proprietario.ProprietarioRequestDTO;
+import br.com.fiap.munchbox.dtos.ProprietarioRequestDTO;
 import br.com.fiap.munchbox.entities.Proprietario;
 import br.com.fiap.munchbox.services.ProprietarioService;
 import io.swagger.v3.oas.annotations.Operation;

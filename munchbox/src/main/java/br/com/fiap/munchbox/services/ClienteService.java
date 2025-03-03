@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.cliente.ClienteRequestDTO;
+import br.com.fiap.munchbox.dtos.ClienteRequestDTO;
 import br.com.fiap.munchbox.entities.Cliente;
 import br.com.fiap.munchbox.entities.Usuario;
 import br.com.fiap.munchbox.repositories.ClienteRepository;
@@ -56,10 +56,10 @@ public class ClienteService
     public void update(ClienteRequestDTO clienteRequestDTO, Long id)
     {
         Cliente cliente = this.clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        Usuario usuario = this.usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuario = this.usuarioRepository.findById(clienteRequestDTO.getIdUsuario()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        cliente.setNome(clienteRequestDTO.getNome());
-        cliente.setEmail(clienteRequestDTO.getEmail());
+        cliente.setNome(clienteRequestDTO.getNome().toUpperCase());
+        cliente.setEmail(clienteRequestDTO.getEmail().toUpperCase());
         cliente.setCelular(clienteRequestDTO.getCelular());
         cliente.setDataAtualizacao(LocalDateTime.now());
         cliente.setUsuario(usuario);

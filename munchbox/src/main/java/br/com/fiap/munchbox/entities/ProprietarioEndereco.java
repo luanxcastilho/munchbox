@@ -25,9 +25,6 @@ public class ProprietarioEndereco implements Serializable {
     @Column(name = "id_proprietario_endereco", unique = true, nullable = false)
     private Long idProprietarioEndereco;
 
-
-    //private Long idProprietario;
-
     @Column(name = "rua", length = 100, nullable = false)
     private String rua;
 

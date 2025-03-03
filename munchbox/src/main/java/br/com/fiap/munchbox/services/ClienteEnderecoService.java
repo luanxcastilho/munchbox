@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.clienteendereco.ClienteEnderecoRequestDTO;
+import br.com.fiap.munchbox.dtos.ClienteEnderecoRequestDTO;
 import br.com.fiap.munchbox.entities.Cliente;
 import br.com.fiap.munchbox.entities.ClienteEndereco;
 import br.com.fiap.munchbox.repositories.ClienteEnderecoRepository;
@@ -40,7 +40,20 @@ public class ClienteEnderecoService
     public void create(ClienteEnderecoRequestDTO clienteEnderecoRequestDTO)
     {
         Cliente cliente = this.clienteRepository.findById(clienteEnderecoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        ClienteEndereco clienteEndereco = new ClienteEndereco(clienteEnderecoRequestDTO.getRua(), clienteEnderecoRequestDTO.getNumero(), clienteEnderecoRequestDTO.getComplemento(), clienteEnderecoRequestDTO.getBairro(), clienteEnderecoRequestDTO.getCidade(), clienteEnderecoRequestDTO.getEstado(), clienteEnderecoRequestDTO.getCep(), LocalDateTime.now(), LocalDateTime.now(), cliente);
+        ClienteEndereco clienteEndereco = new ClienteEndereco
+                (
+                        clienteEnderecoRequestDTO.getRua().toUpperCase(),
+                        clienteEnderecoRequestDTO.getNumero().toUpperCase(),
+                        clienteEnderecoRequestDTO.getComplemento().toUpperCase(),
+                        clienteEnderecoRequestDTO.getBairro().toUpperCase(),
+                        clienteEnderecoRequestDTO.getCidade().toUpperCase(),
+                        clienteEnderecoRequestDTO.getEstado().toUpperCase(),
+                        clienteEnderecoRequestDTO.getCep(),
+                        LocalDateTime.now(),
+                        LocalDateTime.now(),
+                        cliente
+
+                );
         this.clienteEnderecoRepository.save(clienteEndereco);
     }
 
@@ -49,12 +62,12 @@ public class ClienteEnderecoService
         ClienteEndereco clienteEndereco = this.clienteEnderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço do cliente não encontrado"));
         Cliente cliente = this.clienteRepository.findById(clienteEnderecoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-        clienteEndereco.setRua(clienteEnderecoRequestDTO.getRua());
-        clienteEndereco.setNumero(clienteEnderecoRequestDTO.getNumero());
-        clienteEndereco.setComplemento(clienteEnderecoRequestDTO.getComplemento());
-        clienteEndereco.setBairro(clienteEnderecoRequestDTO.getBairro());
-        clienteEndereco.setCidade(clienteEnderecoRequestDTO.getCidade());
-        clienteEndereco.setEstado(clienteEnderecoRequestDTO.getEstado());
+        clienteEndereco.setRua(clienteEnderecoRequestDTO.getRua().toUpperCase());
+        clienteEndereco.setNumero(clienteEnderecoRequestDTO.getNumero().toUpperCase());
+        clienteEndereco.setComplemento(clienteEnderecoRequestDTO.getComplemento().toUpperCase());
+        clienteEndereco.setBairro(clienteEnderecoRequestDTO.getBairro().toUpperCase());
+        clienteEndereco.setCidade(clienteEnderecoRequestDTO.getCidade().toUpperCase());
+        clienteEndereco.setEstado(clienteEnderecoRequestDTO.getEstado().toUpperCase());
         clienteEndereco.setCep(clienteEnderecoRequestDTO.getCep());
         clienteEndereco.setDataAtualizacao(LocalDateTime.now());
         clienteEndereco.setCliente(cliente);

@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.usuario.UsuarioRequestDTO;
+import br.com.fiap.munchbox.dtos.UsuarioRequestDTO;
 import br.com.fiap.munchbox.entities.Usuario;
 import br.com.fiap.munchbox.entities.UsuarioPerfil;
 import br.com.fiap.munchbox.repositories.UsuarioPerfilRepository;
@@ -56,7 +56,7 @@ public class UsuarioService
         Usuario usuario = this.usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         UsuarioPerfil usuarioPerfil = this.usuarioPerfilRepository.findById(usuarioRequestDTO.getIdUsuarioPerfil()).orElseThrow(() -> new RuntimeException("Perfil de usuário não encontrado"));
 
-        usuario.setLogin(usuarioRequestDTO.getLogin());
+        usuario.setLogin(usuarioRequestDTO.getLogin().toUpperCase());
         usuario.setSenha(usuarioRequestDTO.getSenha());
         usuario.setDataAtualizacao(LocalDateTime.now());
         usuario.setUsuarioPerfil(usuarioPerfil);

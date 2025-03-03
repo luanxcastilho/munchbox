@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.controllers;
 
-import br.com.fiap.munchbox.dtos.proprietarioendereco.ProprietarioEnderecoRequestDTO;
+import br.com.fiap.munchbox.dtos.ProprietarioEnderecoRequestDTO;
 import br.com.fiap.munchbox.entities.ProprietarioEndereco;
 import br.com.fiap.munchbox.services.ProprietarioEnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,7 +56,7 @@ public class ProprietarioEnderecoController {
 
     @PostMapping
     @Operation(
-            summary = "Cadastra um nov endereço de proprietário"
+            summary = "Cadastra um novo endereço de proprietário"
     )
     public ResponseEntity<ProprietarioEndereco> create(
             @RequestBody ProprietarioEnderecoRequestDTO proprietarioEndereco

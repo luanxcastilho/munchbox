@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.controllers;
 
-import br.com.fiap.munchbox.dtos.clienteendereco.ClienteEnderecoRequestDTO;
+import br.com.fiap.munchbox.dtos.ClienteEnderecoRequestDTO;
 import br.com.fiap.munchbox.entities.ClienteEndereco;
 import br.com.fiap.munchbox.services.ClienteEnderecoService;
 import io.swagger.v3.oas.annotations.Operation;

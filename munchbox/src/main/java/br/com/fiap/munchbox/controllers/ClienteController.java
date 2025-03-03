@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.controllers;
 
-import br.com.fiap.munchbox.dtos.cliente.ClienteRequestDTO;
+import br.com.fiap.munchbox.dtos.ClienteRequestDTO;
 import br.com.fiap.munchbox.entities.Cliente;
 import br.com.fiap.munchbox.services.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;

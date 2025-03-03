@@ -1,6 +1,6 @@
 package br.com.fiap.munchbox.services;
 
-import br.com.fiap.munchbox.dtos.proprietarioendereco.ProprietarioEnderecoRequestDTO;
+import br.com.fiap.munchbox.dtos.ProprietarioEnderecoRequestDTO;
 import br.com.fiap.munchbox.entities.Proprietario;
 import br.com.fiap.munchbox.entities.ProprietarioEndereco;
 import br.com.fiap.munchbox.helpers.ProprietarioEnderecoHelper;
