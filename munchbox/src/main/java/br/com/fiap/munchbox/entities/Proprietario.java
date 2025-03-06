@@ -13,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Entity
 @Builder
@@ -51,11 +52,6 @@ public class Proprietario implements Serializable
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
-
-    public Proprietario()
-    {
-
-    }
 
     public Proprietario(Usuario usuario, String nome, String email, String celular, LocalDate dataNascimento, LocalDateTime dataAtualizacao, LocalDateTime dataInclusao)
     {
