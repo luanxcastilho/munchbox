@@ -54,6 +54,7 @@ public class ProprietarioEnderecoServiceTest
         proprietarioEnderecoRequestDTO.setRua(proprietarioEndereco.getRua());
         proprietarioEnderecoRequestDTO.setNumero(proprietarioEndereco.getNumero());
         proprietarioEnderecoRequestDTO.setComplemento(proprietarioEndereco.getComplemento());
+        proprietarioEnderecoRequestDTO.setBairro(proprietarioEndereco.getBairro());
         proprietarioEnderecoRequestDTO.setCidade(proprietarioEndereco.getCidade());
         proprietarioEnderecoRequestDTO.setEstado(proprietarioEndereco.getEstado());
         proprietarioEnderecoRequestDTO.setCep(proprietarioEndereco.getCep());

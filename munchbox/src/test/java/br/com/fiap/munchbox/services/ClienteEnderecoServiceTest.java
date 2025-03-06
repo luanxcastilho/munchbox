@@ -53,6 +53,7 @@ public class ClienteEnderecoServiceTest
         clienteEnderecoRequestDTO.setRua(clienteEndereco.getRua());
         clienteEnderecoRequestDTO.setNumero(clienteEndereco.getNumero());
         clienteEnderecoRequestDTO.setComplemento(clienteEndereco.getComplemento());
+        clienteEnderecoRequestDTO.setBairro(clienteEndereco.getBairro());
         clienteEnderecoRequestDTO.setCidade(clienteEndereco.getCidade());
         clienteEnderecoRequestDTO.setEstado(clienteEndereco.getEstado());
         clienteEnderecoRequestDTO.setCep(clienteEndereco.getCep());
