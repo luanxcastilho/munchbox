@@ -94,7 +94,7 @@ public class RestauranteController
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um restaurante pelo ID do restaurante")
-    public ResponseEntity<Restaurante> create(
+    public ResponseEntity<Restaurante> update(
             @RequestBody RestauranteRequestDTO restauranteRequestDTO,
             @PathVariable Long id)
     {

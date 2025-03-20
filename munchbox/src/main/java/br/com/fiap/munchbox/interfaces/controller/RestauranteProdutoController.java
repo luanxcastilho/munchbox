@@ -80,7 +80,7 @@ public class RestauranteProdutoController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um produto pelo ID do produto")
-    public ResponseEntity<RestauranteProduto> create(
+    public ResponseEntity<RestauranteProduto> update(
             @RequestBody RestauranteProdutoRequestDTO restauranteProdutoRequestDTO, @PathVariable Long id) {
 
         logger.info("Iniciando atualização do produto com ID: {}", id);

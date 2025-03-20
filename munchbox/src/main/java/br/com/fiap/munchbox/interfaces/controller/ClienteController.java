@@ -76,7 +76,7 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um cliente pelo ID do cliente")
-    public ResponseEntity<Cliente> create(@RequestBody ClienteRequestDTO clienteRequestDTO, @PathVariable Long id) {
+    public ResponseEntity<Cliente> update(@RequestBody ClienteRequestDTO clienteRequestDTO, @PathVariable Long id) {
 
         logger.info("Iniciando atualização do cliente com ID: {}", id);
 

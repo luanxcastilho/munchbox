@@ -20,7 +20,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/restaurantes-funcionamentos")
-@Tag(name = "Horários de funcionamento de restaurantes", description = "Gerenciamento de horários de funcionamentos de restaurantes")
+@Tag(name = "Horários de funcionamento de restaurantes",
+     description = "Gerenciamento de horários de funcionamentos de restaurantes")
 public class RestauranteFuncionamentoController {
 
     private final Logger logger = LoggerFactory.getLogger(RestauranteFuncionamentoController.class);
@@ -70,14 +71,15 @@ public class RestauranteFuncionamentoController {
 
         cadastrarRestauranteFuncionamentoUseCase.execute(restauranteFuncionamento);
 
-        logger.info("Horário de funcionamento cadastrado com sucesso: {}", restauranteFuncionamento.getRestaurante().getId());
+        logger.info("Horário de funcionamento cadastrado com sucesso: {}",
+                    restauranteFuncionamento.getRestaurante().getId());
 
         return ResponseEntity.status(201).build();
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um horário de funcionamento pelo ID do horário de funcionamento")
-    public ResponseEntity<RestauranteFuncionamento> create(
+    public ResponseEntity<RestauranteFuncionamento> update(
             @RequestBody RestauranteFuncionamentoRequestDTO restauranteFuncionamentoRequestDTO, @PathVariable Long id) {
 
         logger.info("Iniciando atualização do horário de funcionamento com ID: {}", id);
@@ -85,7 +87,8 @@ public class RestauranteFuncionamentoController {
         Restaurante restaurante = consultarUmRestauranteUseCase.execute(restauranteFuncionamentoRequestDTO.getIdRestaurante())
                 .orElseThrow(() -> new RuntimeException("Restaurante não encontrado"));
 
-        RestauranteFuncionamento restauranteFuncionamento = new RestauranteFuncionamento();
+        RestauranteFuncionamento restauranteFuncionamento = consultarUmRestauranteFuncionamentoUseCase.execute(id)
+                .orElseThrow(() -> new RuntimeException("Horário de funcionamento não encontrado"));
 
         restauranteFuncionamento.setId(id);
         restauranteFuncionamento.setRestaurante(restaurante);
@@ -121,9 +124,7 @@ public class RestauranteFuncionamentoController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "15") int size) {
 
-        logger.info("Iniciando consulta de todos os horários de funcionamento. Página: {}, Tamanho: {}",
-                    page,
-                    size);
+        logger.info("Iniciando consulta de todos os horários de funcionamento. Página: {}, Tamanho: {}", page, size);
 
         Pageable pageable = PageRequest.of(page - 1, size);
         List<RestauranteFuncionamento> restauranteFuncionamentos = consultarTodosRestauranteFuncionamentoUseCase.execute(

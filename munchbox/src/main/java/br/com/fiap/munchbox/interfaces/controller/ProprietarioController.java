@@ -70,7 +70,7 @@ public class ProprietarioController
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um proprietário pelo ID do proprietário")
-    public ResponseEntity<Proprietario> create(@RequestBody ProprietarioRequestDTO proprietarioRequestDTO, @PathVariable Long id)
+    public ResponseEntity<Proprietario> update(@RequestBody ProprietarioRequestDTO proprietarioRequestDTO, @PathVariable Long id)
     {
         logger.info("Iniciando atualização do proprietário com ID: {}", id);
 

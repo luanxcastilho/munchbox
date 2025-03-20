@@ -59,7 +59,7 @@ public class UsuarioPerfilController
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um perfil de usuário pelo ID do perfil de usuário")
-    public ResponseEntity<UsuarioPerfil> create(@RequestBody UsuarioPerfilRequestDTO usuarioPerfilRequestDTO, @PathVariable Long id)
+    public ResponseEntity<UsuarioPerfil> update(@RequestBody UsuarioPerfilRequestDTO usuarioPerfilRequestDTO, @PathVariable Long id)
     {
         logger.info("Iniciando atualização do perfil de usuário com ID: {}", id);
 

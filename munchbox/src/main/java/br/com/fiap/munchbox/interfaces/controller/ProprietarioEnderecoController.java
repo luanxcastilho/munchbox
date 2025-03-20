@@ -1,9 +1,9 @@
 package br.com.fiap.munchbox.interfaces.controller;
 
-import br.com.fiap.munchbox.interfaces.dto.ProprietarioEnderecoRequestDTO;
-import br.com.fiap.munchbox.usecase.proprietario.ConsultarUmProprietarioUseCase;
 import br.com.fiap.munchbox.domain.core.Proprietario;
 import br.com.fiap.munchbox.domain.core.ProprietarioEndereco;
+import br.com.fiap.munchbox.interfaces.dto.ProprietarioEnderecoRequestDTO;
+import br.com.fiap.munchbox.usecase.proprietario.ConsultarUmProprietarioUseCase;
 import br.com.fiap.munchbox.usecase.proprietarioendereco.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,8 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/v1/proprietarios-enderecos")
 @Tag(name = "Endereços de proprietários", description = "Gerenciamento de endereços de proprietários")
-public class ProprietarioEnderecoController
-{
+public class ProprietarioEnderecoController {
     private final Logger logger = LoggerFactory.getLogger(ProprietarioEnderecoController.class);
 
     private final CadastrarProprietarioEnderecoUseCase cadastrarProprietarioEnderecoUseCase;
@@ -32,8 +31,12 @@ public class ProprietarioEnderecoController
     private final ConsultarUmProprietarioEnderecoUseCase consultarUmProprietarioEnderecoUseCase;
     private final ConsultarUmProprietarioUseCase consultarUmProprietarioUseCase;
 
-    public ProprietarioEnderecoController(CadastrarProprietarioEnderecoUseCase cadastrarProprietarioEnderecoUseCase, AtualizarProprietarioEnderecoUseCase atualizarProprietarioEnderecoUseCase, RemoverProprietarioEnderecoUseCase removerProprietarioEnderecoUseCase, ConsultarTodosProprietarioEnderecoUseCase consultarTodosProprietarioEnderecoUseCase, ConsultarUmProprietarioEnderecoUseCase consultarUmProprietarioEnderecoUseCase, ConsultarUmProprietarioUseCase consultarUmProprietarioUseCase)
-    {
+    public ProprietarioEnderecoController(CadastrarProprietarioEnderecoUseCase cadastrarProprietarioEnderecoUseCase,
+                                          AtualizarProprietarioEnderecoUseCase atualizarProprietarioEnderecoUseCase,
+                                          RemoverProprietarioEnderecoUseCase removerProprietarioEnderecoUseCase,
+                                          ConsultarTodosProprietarioEnderecoUseCase consultarTodosProprietarioEnderecoUseCase,
+                                          ConsultarUmProprietarioEnderecoUseCase consultarUmProprietarioEnderecoUseCase,
+                                          ConsultarUmProprietarioUseCase consultarUmProprietarioUseCase) {
         this.cadastrarProprietarioEnderecoUseCase = cadastrarProprietarioEnderecoUseCase;
         this.atualizarProprietarioEnderecoUseCase = atualizarProprietarioEnderecoUseCase;
         this.removerProprietarioEnderecoUseCase = removerProprietarioEnderecoUseCase;
@@ -45,23 +48,25 @@ public class ProprietarioEnderecoController
 
     @PostMapping
     @Operation(summary = "Cadastra um novo endereço de proprietário")
-    public ResponseEntity<ProprietarioEndereco> create(@RequestBody ProprietarioEnderecoRequestDTO proprietarioEnderecoRequestDTO)
-    {
-        logger.info("Iniciando cadastro de endereço do proprietário: {}", proprietarioEnderecoRequestDTO.getIdProprietario());
+    public ResponseEntity<ProprietarioEndereco> create(
+            @RequestBody ProprietarioEnderecoRequestDTO proprietarioEnderecoRequestDTO) {
+        logger.info("Iniciando cadastro de endereço do proprietário: {}",
+                    proprietarioEnderecoRequestDTO.getIdProprietario());
 
-        Proprietario proprietario = consultarUmProprietarioUseCase.execute(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietario não encontrado"));
+        Proprietario proprietario = consultarUmProprietarioUseCase.execute(proprietarioEnderecoRequestDTO.getIdProprietario())
+                .orElseThrow(() -> new RuntimeException("Proprietário não encontrado"));
         ProprietarioEndereco proprietarioEndereco = new ProprietarioEndereco();
 
         proprietarioEndereco.setProprietario(proprietario);
-        proprietarioEndereco.setRua( proprietarioEnderecoRequestDTO.getRua() );
-        proprietarioEndereco.setNumero( proprietarioEnderecoRequestDTO.getNumero() );
-        proprietarioEndereco.setComplemento( proprietarioEnderecoRequestDTO.getComplemento() );
-        proprietarioEndereco.setBairro( proprietarioEnderecoRequestDTO.getBairro() );
-        proprietarioEndereco.setCidade( proprietarioEnderecoRequestDTO.getCidade() );
-        proprietarioEndereco.setEstado( proprietarioEnderecoRequestDTO.getEstado() );
-        proprietarioEndereco.setCep( proprietarioEnderecoRequestDTO.getCep() );
-        proprietarioEndereco.setDataAtualizacao( LocalDateTime.now() );
-        proprietarioEndereco.setDataInclusao( LocalDateTime.now() );
+        proprietarioEndereco.setRua(proprietarioEnderecoRequestDTO.getRua());
+        proprietarioEndereco.setNumero(proprietarioEnderecoRequestDTO.getNumero());
+        proprietarioEndereco.setComplemento(proprietarioEnderecoRequestDTO.getComplemento());
+        proprietarioEndereco.setBairro(proprietarioEnderecoRequestDTO.getBairro());
+        proprietarioEndereco.setCidade(proprietarioEnderecoRequestDTO.getCidade());
+        proprietarioEndereco.setEstado(proprietarioEnderecoRequestDTO.getEstado());
+        proprietarioEndereco.setCep(proprietarioEnderecoRequestDTO.getCep());
+        proprietarioEndereco.setDataAtualizacao(LocalDateTime.now());
+        proprietarioEndereco.setDataInclusao(LocalDateTime.now());
 
         cadastrarProprietarioEnderecoUseCase.execute(proprietarioEndereco);
 
@@ -72,23 +77,26 @@ public class ProprietarioEnderecoController
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um endereço de proprietário pelo ID do endereço de proprietário")
-    public ResponseEntity<ProprietarioEndereco> create(@RequestBody ProprietarioEnderecoRequestDTO proprietarioEnderecoRequestDTO, @PathVariable Long id)
-    {
+    public ResponseEntity<ProprietarioEndereco> update(
+            @RequestBody ProprietarioEnderecoRequestDTO proprietarioEnderecoRequestDTO, @PathVariable Long id) {
         logger.info("Iniciando atualização do endereço de proprietário com ID: {}", id);
 
-        ProprietarioEndereco proprietarioEndereco = consultarUmProprietarioEnderecoUseCase.execute(id).orElseThrow(() -> new RuntimeException("Endereço de proprietario não encontrado"));
-        Proprietario proprietario = consultarUmProprietarioUseCase.execute(proprietarioEnderecoRequestDTO.getIdProprietario()).orElseThrow(() -> new RuntimeException("Proprietario não encontrado"));
+        ProprietarioEndereco proprietarioEndereco = consultarUmProprietarioEnderecoUseCase.execute(id)
+                .orElseThrow(() -> new RuntimeException("Endereço de proprietário não encontrado"));
+
+        Proprietario proprietario = consultarUmProprietarioUseCase.execute(proprietarioEnderecoRequestDTO.getIdProprietario())
+                .orElseThrow(() -> new RuntimeException("Proprietário não encontrado"));
 
         proprietarioEndereco.setProprietario(proprietario);
-        proprietarioEndereco.setRua( proprietarioEnderecoRequestDTO.getRua() );
-        proprietarioEndereco.setNumero( proprietarioEnderecoRequestDTO.getNumero() );
-        proprietarioEndereco.setComplemento( proprietarioEnderecoRequestDTO.getComplemento() );
-        proprietarioEndereco.setBairro( proprietarioEnderecoRequestDTO.getBairro() );
-        proprietarioEndereco.setCidade( proprietarioEnderecoRequestDTO.getCidade() );
-        proprietarioEndereco.setEstado( proprietarioEnderecoRequestDTO.getEstado() );
-        proprietarioEndereco.setCep( proprietarioEnderecoRequestDTO.getCep() );
-        proprietarioEndereco.setDataAtualizacao( LocalDateTime.now() );
-        proprietarioEndereco.setDataInclusao( LocalDateTime.now() );
+        proprietarioEndereco.setRua(proprietarioEnderecoRequestDTO.getRua());
+        proprietarioEndereco.setNumero(proprietarioEnderecoRequestDTO.getNumero());
+        proprietarioEndereco.setComplemento(proprietarioEnderecoRequestDTO.getComplemento());
+        proprietarioEndereco.setBairro(proprietarioEnderecoRequestDTO.getBairro());
+        proprietarioEndereco.setCidade(proprietarioEnderecoRequestDTO.getCidade());
+        proprietarioEndereco.setEstado(proprietarioEnderecoRequestDTO.getEstado());
+        proprietarioEndereco.setCep(proprietarioEnderecoRequestDTO.getCep());
+        proprietarioEndereco.setDataAtualizacao(LocalDateTime.now());
+        proprietarioEndereco.setDataInclusao(LocalDateTime.now());
 
         atualizarProprietarioEnderecoUseCase.execute(proprietarioEndereco);
 
@@ -99,8 +107,7 @@ public class ProprietarioEnderecoController
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Remove um endereço de proprietário pelo ID do endereço de proprietário")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id)
-    {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         logger.info("Iniciando remoção do endereço de proprietário com ID: {}", id);
 
         removerProprietarioEnderecoUseCase.execute(id);
@@ -112,29 +119,32 @@ public class ProprietarioEnderecoController
 
     @GetMapping
     @Operation(summary = "Consulta todos os endereços de proprietários")
-    public ResponseEntity<List<ProprietarioEndereco>> findAll(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "15") int size)
-    {
+    public ResponseEntity<List<ProprietarioEndereco>> findAll(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "15") int size) {
         logger.info("Iniciando consulta de todos os endereços de proprietários. Página: {}, Tamanho: {}", page, size);
 
         Pageable pageable = PageRequest.of(page - 1, size);
         List<ProprietarioEndereco> proprietarioEnderecos = consultarTodosProprietarioEnderecoUseCase.execute(pageable);
 
-        logger.info("Consulta de todos os endereços de proprietários concluída. Total de endereços de proprietários encontrados: {}", proprietarioEnderecos.size());
+        logger.info(
+                "Consulta de todos os endereços de proprietários concluída. Total de endereços de proprietários encontrados: {}",
+                proprietarioEnderecos.size());
 
         return ResponseEntity.ok(proprietarioEnderecos);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Consulta um endereço de proprietário pelo ID do endereço de proprietário")
-    public ResponseEntity<Optional<ProprietarioEndereco>> findById(@PathVariable Long id)
-    {
+    public ResponseEntity<Optional<ProprietarioEndereco>> findById(@PathVariable Long id) {
         logger.info("Iniciando consulta do endereço de proprietário com ID: {}", id);
 
         Optional<ProprietarioEndereco> proprietarioEndereco = consultarUmProprietarioEnderecoUseCase.execute(id);
 
         if (proprietarioEndereco.isPresent()) {
             logger.info("Endereço de proprietário encontrado: {}", proprietarioEndereco.get().getId());
-        } else {
+        }
+        else {
             logger.warn("Endereço de proprietário com ID {} não encontrado", id);
         }
 
