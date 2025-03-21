@@ -1,79 +1,153 @@
--- Tabela USUARIO
-CREATE TABLE USUARIO (
-                         ID_USUARIO BIGSERIAL PRIMARY KEY,
-                         LOGIN VARCHAR(50) NOT NULL,
-                         SENHA VARCHAR(50) NOT NULL,
-                         DATA_ATUALIZACAO TIMESTAMP NOT NULL,
-                         DATA_INCLUSAO TIMESTAMP NOT NULL
+create table if not exists munchbox.restaurante_tipo_cozinha
+(
+    id_restaurante_tipo_cozinha bigint auto_increment
+        primary key,
+    nome                        varchar(50) not null,
+    data_atualizacao            datetime(6) not null,
+    data_inclusao               datetime(6) not null
 );
 
-INSERT INTO USUARIO (LOGIN, SENHA, DATA_ATUALIZACAO, DATA_INCLUSAO)
-VALUES ('ADMIN', 'ADMIN123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('CLIENTE', 'CLIENTE123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('PROPRIETARIO', 'PROPRIETARIO123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Tabela CLIENTE
-CREATE TABLE CLIENTE (
-                         ID_CLIENTE BIGSERIAL PRIMARY KEY,
-                         ID_USUARIO BIGINT NOT NULL REFERENCES USUARIO(ID_USUARIO) ON DELETE CASCADE,
-                         NOME VARCHAR(100) NOT NULL,
-                         EMAIL VARCHAR(50) NOT NULL,
-                         CELULAR VARCHAR(25) NOT NULL,
-                         DATA_NASCIMENTO DATE NOT NULL,
-                         DATA_ATUALIZACAO TIMESTAMP NOT NULL,
-                         DATA_INCLUSAO TIMESTAMP NOT NULL
+create table if not exists munchbox.usuario_perfil
+(
+    id_usuario_perfil bigint auto_increment
+        primary key,
+    nome              varchar(50) not null,
+    data_atualizacao  datetime(6) not null,
+    data_inclusao     datetime(6) not null
 );
 
-INSERT INTO CLIENTE (ID_USUARIO, NOME, EMAIL, CELULAR, DATA_NASCIMENTO, DATA_ATUALIZACAO, DATA_INCLUSAO)
-VALUES (2, 'JOSELITO DA SILVA', 'JOSELITO.SILVA@GMAIL.COM', '+55(11)98877-6655', TO_DATE('10/10/1995', 'DD/MM/YYYY'), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Tabela CLIENTE_ENDERECO
-CREATE TABLE CLIENTE_ENDERECO (
-                                  ID_CLIENTE_ENDERECO BIGSERIAL PRIMARY KEY,
-                                  ID_CLIENTE BIGINT NOT NULL REFERENCES CLIENTE(ID_CLIENTE) ON DELETE CASCADE,
-                                  RUA VARCHAR(100) NOT NULL,
-                                  NUMERO VARCHAR(6) NOT NULL,
-                                  COMPLEMENTO VARCHAR(50),
-                                  BAIRRO VARCHAR(50) NOT NULL,
-                                  CIDADE VARCHAR(50) NOT NULL,
-                                  ESTADO VARCHAR(25) NOT NULL,
-                                  CEP VARCHAR(8) NOT NULL,
-                                  DATA_ATUALIZACAO TIMESTAMP NOT NULL,
-                                  DATA_INCLUSAO TIMESTAMP NOT NULL
+create table if not exists munchbox.usuario
+(
+    id_usuario        bigint auto_increment
+        primary key,
+    id_usuario_perfil bigint      not null,
+    login             varchar(50) not null,
+    senha             varchar(50) not null,
+    data_atualizacao  datetime(6) not null,
+    data_inclusao     datetime(6) not null,
+    constraint fk_usuario_1
+        foreign key (id_usuario_perfil) references munchbox.usuario_perfil (id_usuario_perfil)
 );
 
-INSERT INTO CLIENTE_ENDERECO (ID_CLIENTE, RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP, DATA_ATUALIZACAO, DATA_INCLUSAO)
-VALUES (1, 'AVENIDA DAS FLORES', '123', 'APTO 201', 'CENTRO', 'SÃO PAULO', 'SP', '12345678', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Tabela PROPRIETARIO
-CREATE TABLE PROPRIETARIO (
-                              ID_PROPRIETARIO BIGSERIAL PRIMARY KEY,
-                              ID_USUARIO BIGINT NOT NULL REFERENCES USUARIO(ID_USUARIO) ON DELETE CASCADE,
-                              NOME VARCHAR(100) NOT NULL,
-                              EMAIL VARCHAR(50) NOT NULL,
-                              CELULAR VARCHAR(25) NOT NULL,
-                              DATA_NASCIMENTO DATE NOT NULL,
-                              DATA_ATUALIZACAO TIMESTAMP NOT NULL,
-                              DATA_INCLUSAO TIMESTAMP NOT NULL
+create table if not exists munchbox.cliente
+(
+    id_cliente       bigint auto_increment
+        primary key,
+    id_usuario       bigint      not null,
+    nome             varchar(50) not null,
+    data_nascimento  date        not null,
+    celular          varchar(20) not null,
+    email            varchar(50) not null,
+    data_atualizacao datetime(6) not null,
+    data_inclusao    datetime(6) not null,
+    constraint uk_cliente_1
+        unique (id_usuario),
+    constraint fk_cliente_1
+        foreign key (id_usuario) references munchbox.usuario (id_usuario)
 );
 
-INSERT INTO PROPRIETARIO (ID_USUARIO, NOME, EMAIL, CELULAR, DATA_NASCIMENTO, DATA_ATUALIZACAO, DATA_INCLUSAO)
-VALUES (2, 'JOELMA DOS SANTOS', 'JOELMA.SANTOS@RESTAURANTEBARBECUE.COM', '+55(11)96655-6655', TO_DATE('07/09/1978', 'DD/MM/YYYY'), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- Tabela PROPRIETARIO_ENDERECO
-CREATE TABLE PROPRIETARIO_ENDERECO (
-                                       ID_PROPRIETARIO_ENDERECO BIGSERIAL PRIMARY KEY,
-                                       ID_PROPRIETARIO BIGINT NOT NULL REFERENCES PROPRIETARIO(ID_PROPRIETARIO) ON DELETE CASCADE,
-                                       RUA VARCHAR(100) NOT NULL,
-                                       NUMERO INT NOT NULL,
-                                       COMPLEMENTO VARCHAR(50),
-                                       BAIRRO VARCHAR(50) NOT NULL,
-                                       CIDADE VARCHAR(50) NOT NULL,
-                                       ESTADO VARCHAR(25) NOT NULL,
-                                       CEP VARCHAR(8) NOT NULL,
-                                       DATA_ATUALIZACAO TIMESTAMP NOT NULL,
-                                       DATA_INCLUSAO TIMESTAMP NOT NULL
+create table if not exists munchbox.cliente_endereco
+(
+    id_cliente_endereco bigint auto_increment
+        primary key,
+    id_cliente          bigint       not null,
+    rua                 varchar(100) not null,
+    numero              varchar(10)  not null,
+    complemento         varchar(50)  null,
+    bairro              varchar(50)  not null,
+    cidade              varchar(50)  not null,
+    estado              varchar(50)  not null,
+    cep                 varchar(10)  not null,
+    data_atualizacao    datetime(6)  not null,
+    data_inclusao       datetime(6)  not null,
+    constraint fk_cliente_endereco_1
+        foreign key (id_cliente) references munchbox.cliente (id_cliente)
 );
 
-INSERT INTO PROPRIETARIO_ENDERECO (ID_PROPRIETARIO, RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP, DATA_ATUALIZACAO, DATA_INCLUSAO)
-VALUES (1, 'AVENIDA DAS FLORES', 1285, 'RESTAURANTE BARBECUE', 'CENTRO', 'SÃO PAULO', 'SP', '12345678', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+create table if not exists munchbox.proprietario
+(
+    id_proprietario  bigint auto_increment
+        primary key,
+    id_usuario       bigint      not null,
+    nome             varchar(50) not null,
+    data_nascimento  date        not null,
+    celular          varchar(20) not null,
+    email            varchar(50) not null,
+    data_atualizacao datetime(6) not null,
+    data_inclusao    datetime(6) not null,
+    constraint uk_proprietario_1
+        unique (id_usuario),
+    constraint fk_proprietario_1
+        foreign key (id_usuario) references munchbox.usuario (id_usuario)
+);
+
+create table if not exists munchbox.proprietario_endereco
+(
+    id_proprietario_endereco bigint auto_increment
+        primary key,
+    id_proprietario          bigint       not null,
+    rua                      varchar(100) not null,
+    numero                   varchar(10)  not null,
+    complemento              varchar(50)  null,
+    bairro                   varchar(50)  not null,
+    cidade                   varchar(50)  not null,
+    estado                   varchar(50)  not null,
+    cep                      varchar(10)  not null,
+    data_atualizacao         datetime(6)  not null,
+    data_inclusao            datetime(6)  not null,
+    constraint fk_proprietario_endereco_1
+        foreign key (id_proprietario) references munchbox.proprietario (id_proprietario)
+);
+
+create table if not exists munchbox.restaurante
+(
+    id_restaurante              bigint auto_increment
+        primary key,
+    id_restaurante_tipo_cozinha bigint       not null,
+    id_proprietario             bigint       not null,
+    nome                        varchar(50)  not null,
+    rua                         varchar(100) not null,
+    numero                      varchar(10)  not null,
+    complemento                 varchar(50)  null,
+    bairro                      varchar(50)  not null,
+    cidade                      varchar(50)  not null,
+    estado                      varchar(50)  not null,
+    cep                         varchar(10)  not null,
+    data_atualizacao            datetime(6)  not null,
+    data_inclusao               datetime(6)  not null,
+    constraint fk_restaurante_1
+        foreign key (id_restaurante_tipo_cozinha) references munchbox.restaurante_tipo_cozinha (id_restaurante_tipo_cozinha),
+    constraint fk_restaurante_2
+        foreign key (id_proprietario) references munchbox.proprietario (id_proprietario)
+);
+
+create table if not exists munchbox.restaurante_funcionamento
+(
+    id_restaurante_funcionamento bigint auto_increment
+        primary key,
+    id_restaurante               bigint      not null,
+    dia_semana                   int         not null,
+    horario_abertura             varchar(5)  not null,
+    horario_fechamento           varchar(5)  not null,
+    data_atualizacao             datetime(6) not null,
+    data_inclusao                datetime(6) not null,
+    constraint fk_restaurante_funcionamento_1
+        foreign key (id_restaurante) references munchbox.restaurante (id_restaurante)
+);
+
+create table if not exists munchbox.restaurante_produto
+(
+    id_restaurante_produto bigint auto_increment
+        primary key,
+    id_restaurante         bigint                 not null,
+    nome                   varchar(50)            not null,
+    descricao              varchar(250)           not null,
+    valor                  decimal(11, 2)         not null,
+    imagem                 varchar(250)           not null,
+    flag_permite_entrega   varchar(1) default 'S' not null,
+    data_atualizacao       datetime(6)            not null,
+    data_inclusao          datetime(6)            not null,
+    constraint fk_restaurante_produto_1
+        foreign key (id_restaurante) references munchbox.restaurante (id_restaurante)
+);
+
