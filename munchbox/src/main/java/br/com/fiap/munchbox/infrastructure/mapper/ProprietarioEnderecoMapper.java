@@ -2,7 +2,9 @@ package br.com.fiap.munchbox.infrastructure.mapper;
 
 import br.com.fiap.munchbox.domain.core.ProprietarioEndereco;
 import br.com.fiap.munchbox.infrastructure.entity.ProprietarioEnderecoEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProprietarioEnderecoMapper
 {
     public static ProprietarioEndereco toDomain(ProprietarioEnderecoEntity proprietarioEnderecoEntity){

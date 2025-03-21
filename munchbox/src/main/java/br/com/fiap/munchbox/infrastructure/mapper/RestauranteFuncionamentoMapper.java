@@ -2,7 +2,9 @@ package br.com.fiap.munchbox.infrastructure.mapper;
 
 import br.com.fiap.munchbox.domain.core.RestauranteFuncionamento;
 import br.com.fiap.munchbox.infrastructure.entity.RestauranteFuncionamentoEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RestauranteFuncionamentoMapper {
 
     public static RestauranteFuncionamento toDomain(RestauranteFuncionamentoEntity restauranteFuncionamentoEntity) {
