@@ -44,7 +44,7 @@ Para facilitar a configuração e a execução do projeto em um ambiente isolado
 
 4. **Organizar os Arquivos**:
    - Copie os arquivos `docker-compose.yml` e `init.sql` para a pasta `/SEUSERVIDOR/munchbox`.
-   - Copie o arquivo `munchbox-1.0.jar` para a pasta `/SEUSERVIDOR/munchbox/target` e renomeie o arquivo para `munchbox.jar`.
+   - Copie o arquivo `munchbox.jar` para a pasta `/SEUSERVIDOR/munchbox/target`.
 
 5. **Subir os Containers com Docker Compose**:
    - Execute o seguinte comando na raiz do projeto para subir os containers:
@@ -88,18 +88,6 @@ Para facilitar o teste das APIs e garantir que tudo esteja funcionando corretame
 - **Backend**: Implementado em Java, utilizando práticas modernas de arquitetura de software.
 - **Banco de Dados**: Utiliza MySQL, um banco de dados relacional configurado através do Docker.
 - **API**: RESTful, com endpoints para gerenciamento de pedidos, cardápios, clientes, entre outros (Em andamento).
-
----
-
-## 📝 Contribuindo para o Projeto
-
-Se você deseja contribuir com melhorias ou correções, sinta-se à vontade para fazer um **fork** do projeto e enviar um **pull request**. Ficaremos felizes com a sua contribuição!
-
----
-
-## 📄 Licença
-
-Este projeto está sob a [Licença MIT](LICENSE), o que significa que você pode usá-lo, modificá-lo e distribuí-lo, desde que mantenha os créditos originais e siga os termos da licença.
 
 ---
 
