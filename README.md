@@ -63,7 +63,7 @@ Para facilitar o teste das APIs e garantir que tudo esteja funcionando corretame
 
 #### Arquivo de Coleção
 
-- **Nome do Arquivo**: `postman/munchbox-1.0-collection.json`
+- **Nome do Arquivo**: `postman/MunchBox API.postman_collection.json`
 
 #### Como Usar
 
