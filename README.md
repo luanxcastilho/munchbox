@@ -68,7 +68,7 @@ Para facilitar o teste das APIs e garantir que tudo esteja funcionando corretame
 #### Como Usar
 
 1. **Baixar o Arquivo**:
-   - Baixe o arquivo `munchbox-1.0-collection.json` disponível na raiz do repositório.
+   - Baixe o arquivo `MunchBox API.postman_collection.json` disponível na raiz do repositório.
 
 2. **Importar no Postman**:
    - Abra o Postman e vá em "File > Import".
